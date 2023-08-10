@@ -41,14 +41,15 @@ Hosted in GitHub -> [Vanilla-task02](https://abuhorairatarif.github.io/w3-engr/t
 ## Screenshots
 
 Mobile Version ->
-![Vanilla Javascript Mobile View]()
+![Vanilla Javascript Mobile View](https://abuhorairatarif.github.io/w3-engr/task2/Assignment2/screenshots/screenshot1.png)
 <hr/>
 Desktop Version ->
 
-![Vanilla Desktop View]()
+![Vanilla Desktop View](https://abuhorairatarif.github.io/w3-engr/task2/Assignment2/screenshots/screenshot2.png)
+![Vanilla Desktop View2](https://abuhorairatarif.github.io/w3-engr/task2/Assignment2/screenshots/screenshot3.png) 
 
 
 ## Features
 
 * the webpage is fully responsive
-* Except Map all working perfectly
+* Map is working for price range
