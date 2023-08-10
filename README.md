@@ -36,7 +36,7 @@ The project is made for the purpose of testing my knowledge in Pure HTML & CSS a
 ## VERSION: 1.0
 
 ## Live Link
-Hosted in GitHub -> [Vanilla-task02](https://abuhorairatarif.github.io/w3-engr/task2/)
+Hosted in GitHub -> [Vanilla-task02](https://abuhorairatarif.github.io/w3-engr/task2/Assignment2/)
 
 ## Screenshots
 

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment02</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+    <div class="container m-3">
+        
+        <form id="formContainer">
+            <div class="row ">
+                    <div class="col-xl-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-search-location" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" placeholder="Texas,USA" id="location" name="location" autocomplete="off">
+                          </div>
+
+                        <div id="suggestions"></div>
+                          
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-calendar-plus" aria-hidden="true" style="color: cyan;"></i></span>
+                            <input type="text" id="inputField" class="form-control" placeholder="Check In" >
+                            <span class="input-group-text"><i class="fa fa-calendar-minus" aria-hidden="true"></i></span>
+                            <input type="text" id="inputFieldCheckout" class="form-control" placeholder="Check Out">
+                          </div>
+                    </div>
+                    <div class="col-xl-3">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fa fa-user-tag" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" placeholder="Guests" id="guestInput">
+                        <span class="input-group-text"><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+                      </div>
+                      
+                      <div class="toast show" style="display: none;" id="guestToast">
+                        <div class="toast-header">
+                          <strong class="me-auto"></strong>
+                          <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                        </div>
+                        <div class="toast-body text-center">
+                          
+                          <div class="slidecontainer">
+                            <input type="range" min="1" max="7" value="1" class="slider" id="guestRange" style="display: none;">
+                            <span>Guests</span>
+                            <button type="button" class="btn btn-sm btn-primary btn-style" id="decrementGuest">-</button>
+                            <span id="valueGuestRange"></span>
+                            <button type="button" class="btn btn-sm btn-primary btn-style" id="incrementGuest">+</button>
+                          </div>
+                          <button type="button" class="btn btn-sm btn-warning" id="guestSubmit">Apply</button>
+                        </div>
+                      </div>
+                      
+                      
+                      
+                    </div>
+
+                    <div class="col-xl-3">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fa fa-dollar" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" placeholder="Price Range" id="priceInput">
+                        <span class="input-group-text"><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+                      </div>
+                      
+                      <div class="toast show" style="display: none;" id="priceToast">
+                        <div class="toast-header">
+                          <strong class="me-auto"></strong>
+                          <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                        </div>
+                        <div class="toast-body text-center">
+                          <h4>Price Range</h4>
+                          <div class="slidecontainer">
+                            <label for="priceRange"></label>
+                            <div id="priceRange"></div>
+                            <span style="display: none;"> <i class="fa-solid fa-bangladeshi-taka-sign"></i><span id="valuePriceRange"></span></span>
+                          </div>
+                          
+                          <button type="button" class="btn btn-sm btn-warning" id="priceSubmit" onclick="searchHotels()">Apply</button>
+                        </div>
+                      </div>
+                                         
+                    </div>
+        
+                     
+                  
+
+
+            </div>
+
+            <div class="row m-5">
+              <div class="btn-search">
+                <button type="button" class="btn btn-sm btn-warning" id="search" name="search-btn" style="position: relative; bottom: 10px; left: 50%; transform: translateX(-50%);">Search</button>
+              </div>
+              
+            </div>
+            
+          </form>
+          <div class="resultsall">
+            <div class="suggestions"></div> 
+          </div>
+          <!-- <div id="result">
+          </div> -->
+
+          <div class="container result-text " id="resultTextContainer">
+          <div class="search-result" id="locationResult"></div>
+          <div class="search-result" id="checkInResult"></div>
+          <div class="search-result" id="checkOutResult"></div>
+          <div class="search-result" id="guestNumberResult"></div>
+          <div class="search-result" id="priceRangeResult"></div>
+          </div>       
+          </div>
+          <button type="button" class="btn btn-sm btn-warning" id="mapButton" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">Show Map</button>
+
+          <div class="map-container" id="map" style="position: fixed; top: 0; right: 0; bottom: 0; left: 0;">
+          </div>
+            
+          </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/myjavascript.js"></script>
+</body>
+</html>
+
+ 
